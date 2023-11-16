@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../api.service';
+import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,21 +11,12 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    const credentials = {
-      username: this.username,
-      password: this.password,
-    };
-
-    this.apiService.login(credentials).subscribe(
-      (response) => {
+    this.authService.login(this.username, this.password).subscribe(
+      () => {
         console.log('Login successful!');
-        console.log('User data:', response.user);
-        console.log('Access token:', response.accessToken);
-
-        localStorage.setItem('access_token', response.accessToken);
         this.router.navigate(['/dashboard']);
       },
       (error) => {

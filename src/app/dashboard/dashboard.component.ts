@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserRole } from '../models/user.model';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   users: User[] = [
     { id: 1, name: 'Admin', email: 'admin@test.com', role: UserRole.Admin },
     {
@@ -24,7 +25,17 @@ export class DashboardComponent {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public authService: AuthService) {}
+
+  ngOnInit() {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
+
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      console.log('Is Logged In:', isLoggedIn);
+    });
+  }
 
   editUser(userId: number) {
     console.log(`Edit user with ID: ${userId}`);

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { DetailsComponent } from './details/details.component';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
