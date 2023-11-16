@@ -11,6 +11,7 @@ import { ApiService } from './api.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 import { AuthService } from './auth/auth.service';
+import { PasswordResetComponentComponent } from './password-reset-component/password-reset-component.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AuthService } from './auth/auth.service';
     ForgetPasswordComponent,
     DashboardComponent,
     DetailsComponent,
+    PasswordResetComponentComponent,
   ],
   imports: [
     BrowserModule,
