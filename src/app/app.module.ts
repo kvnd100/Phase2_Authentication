@@ -5,11 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './api.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ForgetPasswordComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    ForgetPasswordComponent,
+    DashboardComponent,
+    DetailsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+  ],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
