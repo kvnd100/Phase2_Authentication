@@ -1,6 +1,7 @@
-import { User, UserRole } from '../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
+import { User, UserRole } from '../models/user.model';
 
 @Component({
   selector: 'app-details',
@@ -8,25 +9,47 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  userId!: number;
-  user: User = { id: 0, name: '', email: '', role: UserRole.Admin };
+  userId: string | undefined;
+  user: User = { id: '0', username: '', email: '', role: UserRole.Admin };
   userRoles = Object.values(UserRole);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
+    console.log('DetailsComponent ngOnInit called');
     this.route.params.subscribe((params) => {
-      this.userId = +params['id'];
-      this.user = this.getUserDetails(this.userId);
+      const idFromRoute = params['id'];
+      this.userId = idFromRoute;
+      if (this.userId !== undefined) {
+        console.log('Calling getUserDetails with userId:', this.userId);
+        this.getUserDetails(this.userId);
+      }
     });
   }
 
-  getUserDetails(userId: number): User {
-    return {
-      id: userId,
-      name: 'Admin',
-      email: 'Admin@test.com',
-      role: UserRole.Admin,
-    };
+  getUserDetails(userId: string): void {
+    this.apiService.getUser(userId).subscribe(
+      (response) => {
+        this.user = response;
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
+  }
+
+  saveChanges(): void {
+    if (this.userId !== undefined) {
+      this.apiService.updateUser(this.userId, this.user).subscribe(
+        (response) => {
+          console.log('User details updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating user details:', error);
+        }
+      );
+    } else {
+      console.error('Invalid userId');
+    }
   }
 }
