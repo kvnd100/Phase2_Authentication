@@ -7,7 +7,7 @@
         </ng-container>
         <ng-template #adminTerminalSection>
           <h2>Admin Dashboard</h2>
-          <button type="button" class="btn btn-success">
+          <button type="button" class="btn btn-success" (click)="navigateToCreateUser()">
             <i class="bi bi-plus"></i> Create User
           </button>
           <table class="table table-bordered mt-3">
@@ -31,13 +31,13 @@
                     <i class="bi bi-pencil"></i> Edit
                   </button>
                   <button
-                    style="margin-left: 1rem;"
-                    type="button"
-                    class="btn btn-danger"
-                    (click)="deleteUser(user.id)"
-                  >
-                    <i class="bi bi-trash"></i> Delete
-                  </button>
+                  style="margin-left: 1rem;"
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="openModal(user.id)"
+                >
+                  <i class="bi bi-trash"></i> Delete
+                </button>
                 </td>
               </tr>
             </tbody>

@@ -16,12 +16,10 @@ export class DetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
-    console.log('DetailsComponent ngOnInit called');
     this.route.params.subscribe((params) => {
       const idFromRoute = params['id'];
       this.userId = idFromRoute;
       if (this.userId !== undefined) {
-        console.log('Calling getUserDetails with userId:', this.userId);
         this.getUserDetails(this.userId);
       }
     });

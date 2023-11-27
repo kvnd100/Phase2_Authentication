@@ -28,12 +28,15 @@ export class ApiService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+    return this.http.post(`${this.apiUrl}/register`, user, { headers });
   }
 
   updateUser(userId: string, updatedData: any): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Authorization: `${localStorage.getItem('access_token')}`,
     });
 
     return this.http.put(`${this.apiUrl}/users/${userId}`, updatedData, {
@@ -52,7 +55,7 @@ export class ApiService {
   getUser(userId: string): Observable<User> {
     console.log('getUser method called with userId:', userId);
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Authorization: `${localStorage.getItem('access_token')}`,
     });
 
     return this.http.get<User>(`${this.apiUrl}/users/${userId}`, { headers });
