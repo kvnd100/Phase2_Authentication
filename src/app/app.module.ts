@@ -29,6 +29,7 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     PasswordResetComponentComponent,
     DeleteModalComponent,
     CreateUserComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

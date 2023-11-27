@@ -12,6 +12,7 @@ export class DetailsComponent implements OnInit {
   userId: string | undefined;
   user: User = { id: '0', username: '', email: '', role: UserRole.Admin };
   userRoles = Object.values(UserRole);
+  userForm: any;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
