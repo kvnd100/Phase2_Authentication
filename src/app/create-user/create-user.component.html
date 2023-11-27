@@ -1,0 +1,71 @@
+<div class="container" style="margin-top: 5%;">
+    <div class="card shadow">
+      <div class="card-body">
+        <h2 class="card-title">Create User</h2>
+        <form [formGroup]="userForm" (ngSubmit)="createUser()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" formControlName="username" required placeholder="Enter your username">
+            <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+              <small class="text-danger" *ngIf="userForm.get('username')?.errors?.['required']">
+                Username is required
+              </small>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" required placeholder="Enter your email">
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+              <small class="text-danger" *ngIf="userForm.get('email')?.errors?.['required']">
+                Email is required
+              </small>
+              <small class="text-danger" *ngIf="userForm.get('email')?.errors?.['email']">
+                Invalid email format
+              </small>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" id="role" formControlName="role" required>
+              <option *ngFor="let role of userRoles" [value]="role">{{ role }}</option>
+            </select>
+            <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched">
+              <small class="text-danger" *ngIf="userForm.get('role')?.errors?.['required']">
+                Role is required
+              </small>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Enter your password"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="togglePasswordVisibility()"
+              >
+                <i class="bi bi-eye" *ngIf="!showPassword"></i>
+                <i class="bi bi-eye-slash" *ngIf="showPassword"></i>
+              </button>
+            </div>
+            <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+              <small class="text-danger" *ngIf="userForm.get('password')?.errors?.['required']">
+                Password is required
+              </small>
+              <small class="text-danger" *ngIf="userForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters long
+              </small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Create User</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -17,19 +17,28 @@ export class AuthService {
   loggedInUser$: Observable<User | null> =
     this.loggedInUserSubject.asObservable();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+    const storedToken = localStorage.getItem('access_token');
+    if (storedToken) {
+      this.handleLoginSuccess(storedToken);
+    }
+  }
 
   login(username: string, password: string): Observable<any> {
     return this.apiService.login({ username, password }).pipe(
       tap((response) => {
         const user = response.user;
         const accessToken = response.accessToken;
+        this.handleLoginSuccess(accessToken);
         this.loggedInUserSubject.next(user);
-        localStorage.setItem('access_token', accessToken);
-        this.isLoggedInSubject.next(this.isAuthorizedUser(user));
         console.log('User Role:', user.role);
       })
     );
+  }
+
+  private handleLoginSuccess(accessToken: string): void {
+    localStorage.setItem('access_token', accessToken);
+    this.isLoggedInSubject.next(true);
   }
 
   logout(): void {

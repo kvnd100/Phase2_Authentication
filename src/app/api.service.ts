@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from './models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,19 +19,45 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users`);
+  getUsers(): Observable<User[]> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.get<User[]>(`${this.apiUrl}/users`, { headers });
   }
 
   createUser(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users`, user);
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+    return this.http.post(`${this.apiUrl}/register`, user, { headers });
   }
 
-  updateUser(userId: number, updatedData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/users/${userId}`, updatedData);
+  updateUser(userId: string, updatedData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.put(`${this.apiUrl}/users/${userId}`, updatedData, {
+      headers,
+    });
   }
 
-  deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/${userId}`);
+  deleteUser(userId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers });
+  }
+
+  getUser(userId: string): Observable<User> {
+    console.log('getUser method called with userId:', userId);
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.get<User>(`${this.apiUrl}/users/${userId}`, { headers });
   }
 }
