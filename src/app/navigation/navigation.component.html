@@ -29,6 +29,11 @@
             <i class="fas fa-plane"></i>
           </a>
         </li>
+        <li class="nav-item" [ngClass]="{'active': isActive('/logistics-statistics')}">
+          <a class="nav-link" routerLink="/logistics-statistics">
+            <i class="bi bi-bar-chart-line"></i>
+          </a>
+        </li>
         <li class="nav-item" style="cursor: pointer;">
           <a class="nav-link" (click)="logout()">
             <i class="bi bi-box-arrow-right"></i> 

@@ -2,7 +2,33 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Flight Schedules</h4>
-        <table class="table table-hover">
+        <div>
+          <button style="margin: 1rem; margin-left:0" class=" btn btn-primary" (click)="switchTab('search')">Search Flights</button>
+          <button style="margin: 1rem;" class="btn btn-primary" (click)="switchTab('viewSeats')">View Seats</button>
+          <button style="margin: 1rem;" class="btn btn-primary" (click)="switchTab('makeReservation')">Make Reservation</button>
+          <button style="margin: 1rem;" class="btn btn-primary" (click)="switchTab('issueTicket')">Issue Ticket</button>
+          <button style="margin: 1rem;" class="btn btn-primary" (click)="switchTab('handleRefund')">Handle Refund</button>
+          <button style="margin: 1rem;" class="btn btn-primary" (click)="switchTab('manageBookings')">Manage Bookings</button>
+        </div>
+        <div *ngIf="currentTab === 'search'">
+          <app-search-flights></app-search-flights>
+        </div>
+        <div *ngIf="currentTab === 'viewSeats'">
+          <app-view-seats></app-view-seats>
+        </div>
+        <div *ngIf="currentTab === 'makeReservation'">
+          <app-make-reservation></app-make-reservation>
+        </div>
+        <div *ngIf="currentTab === 'issueTicket'">
+          <app-issue-ticket></app-issue-ticket>
+        </div>
+        <div *ngIf="currentTab === 'handleRefund'">
+          <app-handle-refund></app-handle-refund>
+        </div>
+        <div *ngIf="currentTab === 'manageBookings'">
+          <app-manage-bookings></app-manage-bookings>
+        </div>
+        <table style="margin-top: 1rem;" class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Flight Number</th>

@@ -10,6 +10,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FlightManagementComponent } from './flight-management/flight-management.component';
+import { LogisticsStatisticsComponent } from './logistics-statistics/logistics-statistics.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +43,11 @@ const routes: Routes = [
       {
         path: 'flight-management',
         component: FlightManagementComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'logistics-statistics',
+        component: LogisticsStatisticsComponent,
         canActivate: [AuthGuard],
       },
       { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -1,0 +1,14 @@
+<div>
+    <h5>Search Flights</h5>
+    <div class="form-group">
+      <label for="departure">Departure:</label>
+      <input style="margin-right: 1rem;" type="text" id="departure" [(ngModel)]="searchCriteria.departure" />
+  
+      <label for="destination">Destination:</label>
+      <input style="margin-right: 1rem;" type="text" id="destination" [(ngModel)]="searchCriteria.destination" />
+  
+      <button  style="margin-right: 1rem;" class="btn btn-primary" (click)="searchFlights()">Search</button>
+      <button class="btn btn-secondary" (click)="clearSearch()">Clear</button>
+    </div>
+  </div>
+  

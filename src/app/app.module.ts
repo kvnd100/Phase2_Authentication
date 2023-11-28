@@ -34,6 +34,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FlightManagementComponent } from './flight-management/flight-management.component';
 import { FlightModalComponent } from './flight-modal/flight-modal.component';
 import { ChartModule } from 'angular-highcharts';
+import { SearchFlightsComponent } from './search-flights/search-flights.component';
+import { ViewSeatsComponent } from './view-seats/view-seats.component';
+import { MakeReservationComponent } from './make-reservation/make-reservation.component';
+import { IssueTicketComponent } from './issue-ticket/issue-ticket.component';
+import { HandleRefundComponent } from './handle-refund/handle-refund.component';
+import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
+import { LogisticsStatisticsComponent } from './logistics-statistics/logistics-statistics.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +55,13 @@ import { ChartModule } from 'angular-highcharts';
     UserProfileComponent,
     FlightManagementComponent,
     FlightModalComponent,
+    SearchFlightsComponent,
+    ViewSeatsComponent,
+    MakeReservationComponent,
+    IssueTicketComponent,
+    HandleRefundComponent,
+    ManageBookingsComponent,
+    LogisticsStatisticsComponent,
   ],
   imports: [
     BrowserModule,
