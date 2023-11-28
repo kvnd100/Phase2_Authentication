@@ -30,7 +30,10 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { NavigationComponent } from './navigation/navigation.component';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FlightManagementComponent } from './flight-management/flight-management.component';
+import { FlightModalComponent } from './flight-modal/flight-modal.component';
+import { ChartModule } from 'angular-highcharts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +45,9 @@ import { NavigationComponent } from './navigation/navigation.component';
     DeleteModalComponent,
     CreateUserComponent,
     NavigationComponent,
+    UserProfileComponent,
+    FlightManagementComponent,
+    FlightModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartModule,
   ],
   providers: [ApiService, AuthService],
   bootstrap: [AppComponent],

@@ -8,6 +8,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { PasswordResetComponentComponent } from './password-reset-component/password-reset-component.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FlightManagementComponent } from './flight-management/flight-management.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,6 +32,16 @@ const routes: Routes = [
       {
         path: 'create-user',
         component: CreateUserComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'user-profile',
+        component: UserProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'flight-management',
+        component: FlightManagementComponent,
         canActivate: [AuthGuard],
       },
       { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Flight Schedules</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Flight Number</th>
+              <th scope="col">Route</th>
+              <th scope="col">Departure Time</th>
+              <th scope="col">Arrival Time</th>
+              <th scope="col">Aircraft</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-top-width: 1px;">
+              <td>FLT001</td>
+              <td>New York to Los Angeles</td>
+              <td>2023-12-01 08:00 AM</td>
+              <td>2023-12-01 11:00 AM</td>
+              <td>Boeing 737</td>
+              <td>
+                <button class=" btn btn-primary" (click)="openFlightModal('FLT001')">View Details</button>
+              </td>
+            </tr>
+            <tr>
+              <td>FLT002</td>
+              <td>New York to Los Angeles</td>
+              <td>2023-12-01 11:00 AM</td>
+              <td>2023-12-01 02:00 PM</td>
+              <td>Boeing 737</td>
+              <td>
+                <button class=" btn btn-primary" (click)="openFlightModal('FLT002')">View Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

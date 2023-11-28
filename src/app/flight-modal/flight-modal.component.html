@@ -1,0 +1,46 @@
+<div class="modal-header ">
+    <h5 class="modal-title" id="exampleModalLabel">Flight Details</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h4>Flight Number: {{ flightNumber }}</h4>
+      <p>Route: New York to Los Angeles</p>
+      <p>Departure Time: 2023-12-01 08:00 AM</p>
+      <p>Arrival Time: 2023-12-01 11:00 AM</p>
+      <p>Aircraft: Boeing 737</p>
+    </div>
+    <hr>
+    <h4>Passenger Manifest</h4>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Passenger Name</th>
+          <th scope="col">Seat Number</th>
+          <th scope="col">Meal Preference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Peter Parker</td>
+          <td>12A</td>
+          <td>Vegetarian</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+<div [chart]="lineChart">
+
+</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+      Close
+    </button>
+
+  </div>

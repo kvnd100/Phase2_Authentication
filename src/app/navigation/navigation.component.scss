@@ -19,6 +19,7 @@
     flex: 1;
     overflow: auto;
   }
-  
 
-  
+  .nav-item.active i {
+    color: rgb(223,98,56);
+  }

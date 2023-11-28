@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { User, UserRole } from '../models/user.model';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,30 @@ export class AuthService {
     this.loggedInUserSubject.asObservable();
 
   constructor(private apiService: ApiService) {
+    this.initializeAuth();
+  }
+
+  public initializeAuth(): void {
     const storedToken = localStorage.getItem('access_token');
     if (storedToken) {
-      this.handleLoginSuccess(storedToken);
+      this.loadUserFromStorage(storedToken);
     }
+  }
+
+  private loadUserFromStorage(storedToken: string): void {
+    this.apiService
+      .getUserDetailsFromToken(storedToken)
+      .pipe(
+        switchMap((user) => {
+          this.handleLoginSuccess(user);
+          return [];
+        }),
+        catchError((error) => {
+          console.error('Error fetching user details from token:', error);
+          return [];
+        })
+      )
+      .subscribe();
   }
 
   login(username: string, password: string): Observable<any> {
@@ -29,16 +50,16 @@ export class AuthService {
       tap((response) => {
         const user = response.user;
         const accessToken = response.accessToken;
-        this.handleLoginSuccess(accessToken);
-        this.loggedInUserSubject.next(user);
+        this.handleLoginSuccess(user);
+        localStorage.setItem('access_token', accessToken);
         console.log('User Role:', user.role);
       })
     );
   }
 
-  private handleLoginSuccess(accessToken: string): void {
-    localStorage.setItem('access_token', accessToken);
-    this.isLoggedInSubject.next(true);
+  private handleLoginSuccess(user: User): void {
+    this.loggedInUserSubject.next(user);
+    this.isLoggedInSubject.next(this.isAuthorizedUser(user));
   }
 
   logout(): void {
