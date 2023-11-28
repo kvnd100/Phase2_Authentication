@@ -60,4 +60,12 @@ export class ApiService {
 
     return this.http.get<User>(`${this.apiUrl}/users/${userId}`, { headers });
   }
+
+  getUserDetailsFromToken(token: string): Observable<User> {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+
+    return this.http.get<User>(`${this.apiUrl}/get-user-details`, { headers });
+  }
 }

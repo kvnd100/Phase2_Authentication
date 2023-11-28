@@ -1,0 +1,20 @@
+<div style="max-width: 450px; margin-top: 5%;" class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+      <img src="../../assets/christopher-campbell-rDEOVtE7vOs-unsplash.jpg" class="card-img-top" alt="Fissure in Sandstone" />
+  
+      <div class="card-body">
+        <h2 class="card-title">User Profile</h2>
+  
+        <div *ngIf="(user$ | async) as user">
+          <div>
+            <p class="card-text"><strong>Name:</strong> {{ user.username }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+            <p class="card-text"><strong>Role:</strong> {{ user.role }}</p>
+          </div>
+        </div>
+  
+        <button  class="btn btn-primary edit-button" style="margin-top: 1rem;" (click)="enableEdit()">Edit Profile</button>
+      </div>
+    </div>
+  </div>
+  
