@@ -53,7 +53,6 @@ export class ApiService {
   }
 
   getUser(userId: string): Observable<User> {
-    console.log('getUser method called with userId:', userId);
     const headers = new HttpHeaders({
       Authorization: `${localStorage.getItem('access_token')}`,
     });
@@ -67,5 +66,15 @@ export class ApiService {
     });
 
     return this.http.get<User>(`${this.apiUrl}/get-user-details`, { headers });
+  }
+
+  getStatistics(year: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/statistics?year=${year}`, {
+      headers,
+    });
   }
 }
