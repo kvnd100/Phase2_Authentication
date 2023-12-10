@@ -4,6 +4,8 @@ import { FlightModalComponent } from '../flight-modal/flight-modal.component';
 import { ApiService } from '../api.service';
 import { Flight } from '../models/flight.model';
 import { ViewSeatsComponent } from '../view-seats/view-seats.component';
+import { MakeReservationComponent } from '../make-reservation/make-reservation.component';
+import { IssueTicketComponent } from '../issue-ticket/issue-ticket.component';
 @Component({
   selector: 'app-flight-management',
   templateUrl: './flight-management.component.html',
@@ -11,6 +13,10 @@ import { ViewSeatsComponent } from '../view-seats/view-seats.component';
 })
 export class FlightManagementComponent {
   @ViewChild(ViewSeatsComponent) viewSeatsComponent!: ViewSeatsComponent;
+  @ViewChild(MakeReservationComponent)
+  makeReservationComponent!: MakeReservationComponent;
+  @ViewChild(IssueTicketComponent)
+  issueTicketComponent!: IssueTicketComponent;
   modalRef: MdbModalRef<FlightModalComponent> | null = null;
   currentTab:
     | 'search'
@@ -40,7 +46,19 @@ export class FlightManagementComponent {
     });
   }
   selectFlight(flight: Flight): void {
-    this.viewSeatsComponent.setCurrentFlight(flight);
+    switch (this.currentTab) {
+      case 'viewSeats':
+        this.viewSeatsComponent?.setCurrentFlight(flight);
+        break;
+      case 'makeReservation':
+        this.makeReservationComponent?.setCurrentFlight(flight);
+        break;
+      case 'issueTicket':
+        this.issueTicketComponent?.setCurrentFlight(flight);
+        break;
+      default:
+        break;
+    }
   }
   switchTab(
     tab:

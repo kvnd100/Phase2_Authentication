@@ -1,3 +1,29 @@
-<div>
-    <h5>Issue Tickets</h5>
-</div>
+<div *ngIf="currentFlight" class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Issue Ticket - Flight {{ currentFlight.flightNumber }}</h4>
+        <table class="table  ">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Seat</th>
+                <th scope="col">Meal Preference</th>
+                <th scope="col">Class</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bookedUser of bookedUsers">
+                <td>{{ bookedUser.passengerName }}</td>
+                <td>{{ bookedUser.seatNumber }}</td>
+                <td>{{ bookedUser.mealPreference }}</td>
+                <td>{{ bookedUser.travelClass }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="issueTicket(bookedUser)">Issue Ticket</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
