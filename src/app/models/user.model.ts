@@ -9,5 +9,13 @@ export interface User {
   username: string;
   email: string;
   role: UserRole;
+  profile: UserProfile;
 }
 
+export interface UserProfile {
+  fullName: String;
+  passportNumber: String;
+  address: String;
+  phoneNumber: String;
+  profilePicture: String;
+}

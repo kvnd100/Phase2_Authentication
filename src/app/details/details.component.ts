@@ -10,7 +10,19 @@ import { User, UserRole } from '../models/user.model';
 })
 export class DetailsComponent implements OnInit {
   userId: string | undefined;
-  user: User = { id: '0', username: '', email: '', role: UserRole.Admin };
+  user: User = {
+    id: '0',
+    username: '',
+    email: '',
+    role: UserRole.Admin,
+    profile: {
+      fullName: '',
+      passportNumber: '',
+      address: '',
+      phoneNumber: '',
+      profilePicture: '',
+    },
+  };
   userRoles = Object.values(UserRole);
   userForm: any;
 

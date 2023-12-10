@@ -9,11 +9,11 @@
   </div>
   <div class="modal-body">
     <div>
-      <h4>Flight Number: {{ flightNumber }}</h4>
-      <p>Route: New York to Los Angeles</p>
-      <p>Departure Time: 2023-12-01 08:00 AM</p>
-      <p>Arrival Time: 2023-12-01 11:00 AM</p>
-      <p>Aircraft: Boeing 737</p>
+      <h4>Flight Number: {{ flight.flightNumber }}</h4>
+      <p>Route: {{flight.route}}</p>
+      <p>Departure Time: {{flight.departureTime}}</p>
+      <p>Arrival Time: {{flight.arrivalTime}}</p>
+      <p>Aircraft: {{flight.aircraft}}</p>
     </div>
     <hr>
     <h4>Passenger Manifest</h4>

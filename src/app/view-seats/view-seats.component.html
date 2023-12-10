@@ -1,3 +1,24 @@
-<div>
-    <h5>View Available Seats</h5>
-</div>
+<div *ngIf="currentFlight" class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Available Seats - Flight {{ currentFlight.flightNumber }}</h4>
+        
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Seat Number</th>
+              <th scope="col">Class</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let seat of currentFlight.availableSeats" style="border-top-width: 1px;">
+              <td>{{ seat.seatNumber }}</td>
+              <td>{{ seat.class }}</td>
+              <td>{{ seat.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

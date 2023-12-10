@@ -41,6 +41,7 @@ import { IssueTicketComponent } from './issue-ticket/issue-ticket.component';
 import { HandleRefundComponent } from './handle-refund/handle-refund.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 import { LogisticsStatisticsComponent } from './logistics-statistics/logistics-statistics.component';
+import { LoaderComponent } from './loader/loader.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { LogisticsStatisticsComponent } from './logistics-statistics/logistics-s
     HandleRefundComponent,
     ManageBookingsComponent,
     LogisticsStatisticsComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
