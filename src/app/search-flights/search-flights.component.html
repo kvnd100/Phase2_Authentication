@@ -1,14 +1,34 @@
 <div>
-    <h5>Search Flights</h5>
-    <div class="form-group">
-      <label for="departure">Departure:</label>
-      <input style="margin-right: 1rem;" type="text" id="departure" [(ngModel)]="searchCriteria.departure" />
-  
-      <label for="destination">Destination:</label>
-      <input style="margin-right: 1rem;" type="text" id="destination" [(ngModel)]="searchCriteria.destination" />
-  
-      <button  style="margin-right: 1rem;" class="btn btn-primary" (click)="searchFlights()">Search</button>
-      <button class="btn btn-secondary" (click)="clearSearch()">Clear</button>
-    </div>
+  <h5>Search Flights</h5>
+  <div class="form-group">
+    <label for="departure">Departure:</label>
+    <input style="margin-right: 1rem;" type="text" id="departure" [(ngModel)]="searchCriteria.departure" />
+
+    <label for="destination">Destination:</label>
+    <input style="margin-right: 1rem;" type="text" id="destination" [(ngModel)]="searchCriteria.destination" />
+
+    <button style="margin-right: 1rem;" class="btn btn-primary" (click)="searchFlights()">Search</button>
+    <button class="btn btn-secondary" (click)="clearSearch()">Clear</button>
   </div>
-  
+  <div style="margin-top: 1rem;" *ngIf="noResultsMessage !== ''" class="alert alert-info">{{ noResultsMessage }}</div>
+  <table *ngIf="searchResults.length > 0" class="table table-hover search-results-table">
+    <thead>
+      <tr>
+        <th scope="col">Flight Number</th>
+        <th scope="col">Route</th>
+        <th scope="col">Departure Time</th>
+        <th scope="col">Arrival Time</th>
+        <th scope="col">Aircraft</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of searchResults" style="border-top-width: 1px;">
+        <td>{{ flight.flightNumber }}</td>
+        <td>{{ flight.route }}</td>
+        <td>{{ flight.departureTime }}</td>
+        <td>{{ flight.arrivalTime }}</td>
+        <td>{{ flight.aircraft }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

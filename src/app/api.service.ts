@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './models/user.model';
-
+import { Flight } from './models/flight.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -99,6 +99,25 @@ export class ApiService {
       {
         headers,
       }
+    );
+  }
+  getFlights(): Observable<Flight[]> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.get<Flight[]>(`${this.apiUrl}/flights`, { headers });
+  }
+
+  searchFlights(departure: string, destination: string): Observable<Flight[]> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.post<Flight[]>(
+      `${this.apiUrl}/flights/search`,
+      { departure, destination },
+      { headers }
     );
   }
 }

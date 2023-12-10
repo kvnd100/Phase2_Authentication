@@ -14,7 +14,7 @@
           <app-search-flights></app-search-flights>
         </div>
         <div *ngIf="currentTab === 'viewSeats'">
-          <app-view-seats></app-view-seats>
+          <app-view-seats #viewSeatsComponent></app-view-seats>
         </div>
         <div *ngIf="currentTab === 'makeReservation'">
           <app-make-reservation></app-make-reservation>
@@ -39,24 +39,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="border-top-width: 1px;">
-              <td>FLT001</td>
-              <td>New York to Los Angeles</td>
-              <td>2023-12-01 08:00 AM</td>
-              <td>2023-12-01 11:00 AM</td>
-              <td>Boeing 737</td>
+            <tr *ngFor="let flight of flights" style="border-top-width: 1px;" (click)="selectFlight(flight)">
+              <td>{{ flight.flightNumber }}</td>
+              <td>{{ flight.route }}</td>
+              <td>{{ flight.departureTime }}</td>
+              <td>{{ flight.arrivalTime }}</td>
+              <td>{{ flight.aircraft }}</td>
               <td>
-                <button class=" btn btn-primary" (click)="openFlightModal('FLT001')">View Details</button>
-              </td>
-            </tr>
-            <tr>
-              <td>FLT002</td>
-              <td>New York to Los Angeles</td>
-              <td>2023-12-01 11:00 AM</td>
-              <td>2023-12-01 02:00 PM</td>
-              <td>Boeing 737</td>
-              <td>
-                <button class=" btn btn-primary" (click)="openFlightModal('FLT002')">View Details</button>
+                <button class="btn btn-primary" (click)="openFlightModal(flight.flightNumber)">View Details</button>
               </td>
             </tr>
           </tbody>
