@@ -18,6 +18,16 @@ export class AuthService {
   loggedInUser$: Observable<User | null> =
     this.loggedInUserSubject.asObservable();
 
+  private userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<
+    string | null
+  >(null);
+  userId$: Observable<string | null> = this.userIdSubject.asObservable();
+
+  private initializationSubject: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  initializationComplete$: Observable<boolean> =
+    this.initializationSubject.asObservable();
+
   constructor(private apiService: ApiService) {
     this.initializeAuth();
   }
@@ -26,6 +36,8 @@ export class AuthService {
     const storedToken = localStorage.getItem('access_token');
     if (storedToken) {
       this.loadUserFromStorage(storedToken);
+    } else {
+      this.initializationSubject.next(true);
     }
   }
 
@@ -35,10 +47,13 @@ export class AuthService {
       .pipe(
         switchMap((user) => {
           this.handleLoginSuccess(user);
+          this.userIdSubject.next(user.id);
+          this.initializationSubject.next(true);
           return [];
         }),
         catchError((error) => {
           console.error('Error fetching user details from token:', error);
+          this.initializationSubject.next(true);
           return [];
         })
       )
@@ -87,5 +102,9 @@ export class AuthService {
   isPassenger(): boolean {
     const user = this.loggedInUserSubject.value;
     return user?.role === UserRole.Passenger || false;
+  }
+
+  getUserId(): string | null {
+    return this.userIdSubject.value;
   }
 }

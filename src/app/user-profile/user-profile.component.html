@@ -1,8 +1,12 @@
+<app-loader [loading]="loading"></app-loader>
 <div style="display: flex;  margin-top: 5%; gap: 1rem;">
   <div style="flex: 1;">
   <div style=" margin-left: 1rem;" class="container d-flex justify-content-start align-items-start">
     <div style="max-width: 450px" class="card">
-      <img  src="../../assets/christopher-campbell-rDEOVtE7vOs-unsplash.jpg" class="card-img-top" alt="Profile picture" />
+      <img *ngIf="userProfile?.profilePicture; else defaultPicture" [src]="'http://localhost:3000/' + userProfile.profilePicture" alt="Profile Picture" />
+      <ng-template #defaultPicture>
+        <img src="../../assets/christopher-campbell-rDEOVtE7vOs-unsplash.jpg" alt="Default Profile Picture" />
+      </ng-template>
 
       <div class="card-body">
         <h2 class="card-title">User Profile</h2>
@@ -10,11 +14,11 @@
         <div *ngIf="(user$ | async) as user">
           <div>
             <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
-            <p class="card-text"><strong>Full Name:</strong> {{ user.username }}</p>
+            <p class="card-text"><strong>Full Name:</strong> {{ userProfile?.fullName }}</p>
             <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
-            <p class="card-text"><strong>Passport Number:</strong>123456789</p>
-            <p class="card-text"><strong>Address:</strong> SLIIT Malabe Campus, New Kandy Rd, Malabe 10115</p>
-            <p class="card-text"><strong>Phone Number:</strong>+94 123456789</p>
+            <p class="card-text"><strong>Passport Number:</strong>{{ userProfile?.passportNumber }}</p>
+            <p class="card-text"><strong>Address:</strong> {{ userProfile?.address}}</p>
+            <p class="card-text"><strong>Phone Number:</strong>{{ userProfile?.phoneNumber }}</p>
           </div>
           <button class="btn" [class.btn-primary]="!isEditing" [class.btn-success]="isEditing" style="margin-top: 1rem;" (click)="isEditing ? saveChanges() : enableEdit()">
             {{ isEditing ? 'Save Changes' : 'Edit Profile' }}
@@ -55,12 +59,6 @@
       </div>
     </form>
 
-  </div>
-
-</div>
-<div style="flex: 1;" >
-  <div *ngIf="isEditing">
-    <img *ngIf="profileForm.get('profilePicture')?.value" [src]="profileForm.get('profilePicture')?.value" alt="Profile Picture" style="max-width: 100%; margin-left:10rem; margin-top: 1rem;" />
   </div>
 </div>
 </div>

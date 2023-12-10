@@ -77,4 +77,31 @@ export class ApiService {
       headers,
     });
   }
+
+  getUserProfile(userId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/user-profile/${userId}`, {
+      headers,
+    });
+  }
+
+  updateUserProfile(userId: string, updatedProfile: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${localStorage.getItem('access_token')}`,
+    });
+
+    return this.http.put(
+      `${this.apiUrl}/user-profile/${userId}`,
+      updatedProfile,
+      {
+        headers,
+      }
+    );
+  }
 }
+
+
+
