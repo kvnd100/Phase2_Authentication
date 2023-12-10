@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-
+import { ApiService } from '../api.service';
 @Component({
   selector: 'app-logistics-statistics',
   templateUrl: './logistics-statistics.component.html',
@@ -10,29 +10,50 @@ export class LogisticsStatisticsComponent implements OnInit {
   financialReportChart!: Chart;
   passengerStatisticsChart!: Chart;
   operationalPerformanceChart!: Chart;
+  selectedDate: string;
+  currentYear: number;
+  minYear: number;
 
-  constructor() {}
+  constructor(private apiService: ApiService) {
+    this.currentYear = new Date().getFullYear();
+    this.minYear = 2022;
+    this.selectedDate = this.currentYear.toString();
+  }
 
   ngOnInit(): void {
-    const financialReportData = [100000, 150000, 200000, 180000, 250000];
-    const passengerStatisticsData = [500, 800, 1200, 1000, 1500];
-    const operationalPerformanceData = [90, 85, 92, 88, 94];
+    this.fetchChartData();
+  }
 
-    this.financialReportChart = this.createChart(
-      'Financial Report',
-      'Monthly Revenue',
-      financialReportData
-    );
-    this.passengerStatisticsChart = this.createChart(
-      'Passenger Statistics',
-      'Passengers',
-      passengerStatisticsData
-    );
-    this.operationalPerformanceChart = this.createChart(
-      'Operational Performance',
-      'Percentage',
-      operationalPerformanceData
-    );
+  private fetchChartData(year?: number): void {
+    if (!year) {
+      year = new Date().getFullYear();
+    }
+    this.apiService
+      .getStatistics(year)
+      .subscribe((statistics: { chartData: any }) => {
+        const chartData = statistics.chartData;
+
+        this.financialReportChart = this.createChart(
+          'Financial Report',
+          'Monthly Revenue',
+          chartData.financialReportData
+        );
+        this.passengerStatisticsChart = this.createChart(
+          'Passenger Statistics',
+          'Passengers',
+          chartData.passengerStatisticsData
+        );
+        this.operationalPerformanceChart = this.createChart(
+          'Operational Performance',
+          'Percentage',
+          chartData.operationalPerformanceData
+        );
+      });
+  }
+
+  onDateChange(): void {
+    const year = parseInt(this.selectedDate, 10);
+    this.fetchChartData(year);
   }
 
   private createChart(

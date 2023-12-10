@@ -1,19 +1,29 @@
 <div class="container mt-4">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Logistics & Statistics</h4>
-  
-        <div class="chart-container">
-          <div class="chart">
-            <div [chart]="financialReportChart" class="mdb-chart"></div>
-          </div>
-          <div class="chart">
-            <div [chart]="passengerStatisticsChart" class="mdb-chart"></div>
-          </div>
-          <div class="chart">
-            <div [chart]="operationalPerformanceChart" class="mdb-chart"></div>
-          </div>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Logistics & Statistics</h4>
+      <div style="max-width: 200px;" class="form-group">
+        <label for="yearPicker">Select Year:</label>
+        <input
+          type="date"
+          [(ngModel)]="selectedDate"
+          (change)="onDateChange()"
+          [min]="minYear + '-01-01'"
+          [max]="currentYear + '-12-31'"
+          class="form-control"
+        />
+      </div>
+      <div class="chart-container">
+        <div class="chart">
+          <div [chart]="financialReportChart" class="mdb-chart"></div>
+        </div>
+        <div class="chart">
+          <div [chart]="passengerStatisticsChart" class="mdb-chart"></div>
+        </div>
+        <div class="chart">
+          <div [chart]="operationalPerformanceChart" class="mdb-chart"></div>
         </div>
       </div>
     </div>
   </div>
+ </div>
